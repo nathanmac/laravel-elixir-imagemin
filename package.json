@@ -1,6 +1,6 @@
 {
   "name": "laravel-elixir-imagemin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Laravel Elixir wrapper around imagemin Gulp task.",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "gulp-imagemin": "^1.2.0",
+    "imagemin-pngquant": "^4.0.0",
     "gulp-notify": "^2.0.0",
     "underscore": "^1.7.0"
   }
