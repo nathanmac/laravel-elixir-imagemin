@@ -37,9 +37,8 @@ elixir.extend('imagemin', function(src, output, options) {
             .pipe(gulp.dest(output || 'public/img'))
             .pipe(notify({
                 title: 'ImageMin Complete!',
-                subtitle: 'All images have be optimised.',
-                icon: __dirname + '/../laravel-elixir/icons/pass.png',
-                message: ' '
+                message: 'All images have be optimised.',
+                icon: __dirname + '/../laravel-elixir/icons/pass.png'
             }));
     });
 
