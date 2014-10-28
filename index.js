@@ -21,7 +21,7 @@ elixir.extend('imagemin', function(src, output, options) {
 
     var config = this;
 
-    var baseDir = config.preprocessors.baseDir + 'img';
+    var baseDir = config.assetsDir + 'img';
 
     src = this.buildGulpSrc(src, baseDir, '**/*');
 
@@ -38,7 +38,7 @@ elixir.extend('imagemin', function(src, output, options) {
             .pipe(notify({
                 title: 'ImageMin Complete!',
                 subtitle: 'All images have be optimised.',
-                icon: __dirname + '/../laravel-elixir/icons/laravel.png',
+                icon: __dirname + '/../laravel-elixir/icons/pass.png',
                 message: ' '
             }));
     });
