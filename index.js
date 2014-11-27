@@ -4,6 +4,7 @@ var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
 var notify = require('gulp-notify');
 var _ = require('underscore');
+var utilities = require('laravel-elixir/ingredients/helpers/utilities');
 
 /*
  |----------------------------------------------------------------
@@ -23,7 +24,7 @@ elixir.extend('imagemin', function(src, output, options) {
 
     var baseDir = config.assetsDir + 'img';
 
-    src = this.buildGulpSrc(src, baseDir, '**/*');
+    src = utilities.buildGulpSrc(src, baseDir, '**/*');
 
     options = _.extend({
         progressive: true,
