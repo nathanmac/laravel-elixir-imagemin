@@ -1,6 +1,6 @@
 {
   "name": "laravel-elixir-imagemin",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Laravel Elixir wrapper around imagemin Gulp task.",
   "main": "index.js",
   "scripts": {
