@@ -4,7 +4,7 @@ var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
 var notify = require('gulp-notify');
 var _ = require('underscore');
-var utilities = require('laravel-elixir/ingredients/helpers/utilities');
+var utilities = require('laravel-elixir/ingredients/commands/utilities');
 
 /*
  |----------------------------------------------------------------
