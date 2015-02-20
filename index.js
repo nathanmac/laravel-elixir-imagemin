@@ -36,10 +36,10 @@ elixir.extend('imagemin', function(src, output, options) {
         return gulp.src(src)
             .pipe(imagemin(options))
             .pipe(gulp.dest(output || 'public/img'))
-            .pipe(notify({
-                title: 'ImageMin Complete!',
-                message: 'All images have be optimised.',
-                icon: __dirname + '/../laravel-elixir/icons/pass.png'
+            .on('error', notify.onError({
+                title: 'ImageMin Failed!',
+                message: 'Failed to optimise images.',
+                icon: __dirname + '/../laravel-elixir/icons/fail.png'
             }));
     });
 
