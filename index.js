@@ -1,5 +1,6 @@
 var elixir = require('laravel-elixir');
 var gulp = require('gulp');
+var changed = require('gulp-changed');
 var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
 var notify = require('gulp-notify');
@@ -34,6 +35,7 @@ elixir.extend('imagemin', function(src, output, options) {
 
     gulp.task('imagemin', function() {
         return gulp.src(src)
+            .pipe(changed(output || 'public/img'))
             .pipe(imagemin(options))
             .pipe(gulp.dest(output || 'public/img'))
             .on('error', notify.onError({
