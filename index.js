@@ -44,13 +44,7 @@ elixir.extend('imagemin', function(src, output, options) {
             }));
     });
 
-    this.registerWatcher('imagemin', [
-        baseDir + '/**/*.png',
-        baseDir + '/**/*.gif',
-        baseDir + '/**/*.svg',
-        baseDir + '/**/*.jpg',
-        baseDir + '/**/*.jpeg'
-    ]);
+    this.registerWatcher('imagemin', baseDir + '/**/*.{png,gif,svg,jpg,jpeg}');
 
     return this.queueTask('imagemin');
 
