@@ -22,7 +22,8 @@ elixir.extend('imagemin', function(src, output, options) {
 
     var config = this;
 
-    var baseDir = config.assetsDir + 'img';
+    // default to: 'resources/assets/images'
+    var baseDir = config.assetsDir + 'images';
 
     src = utilities.buildGulpSrc(src, baseDir, '**/*');
 
@@ -43,13 +44,7 @@ elixir.extend('imagemin', function(src, output, options) {
             }));
     });
 
-    this.registerWatcher('imagemin', [
-        baseDir + '/**/*.png',
-        baseDir + '/**/*.gif',
-        baseDir + '/**/*.svg',
-        baseDir + '/**/*.jpg',
-        baseDir + '/**/*.jpeg'
-    ]);
+    this.registerWatcher('imagemin', baseDir + '/**/*.{png,gif,svg,jpg,jpeg}');
 
     return this.queueTask('imagemin');
 
