@@ -1,11 +1,10 @@
-var elixir = require('laravel-elixir');
-var gulp = require('gulp');
+var gulp     = require('gulp');
 var changed = require('gulp-changed');
 var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
-var notify = require('gulp-notify');
-var _ = require('underscore');
-var utilities = require('laravel-elixir/ingredients/commands/Utilities');
+var _        = require('underscore');
+var elixir   = require('laravel-elixir');
+var config   = elixir.config;
 
 /*
  |----------------------------------------------------------------
@@ -18,36 +17,42 @@ var utilities = require('laravel-elixir/ingredients/commands/Utilities');
  | Minify PNG, JPEG, GIF and SVG images
  |
  */
-
 elixir.extend('imagemin', function(src, output, options) {
 
-    var config = this;
+    config.images = {
+        folder: 'images',
+        outputFolder: 'images',
 
-    // default to: 'resources/assets/images'
-    var baseDir = config.assetsDir + 'images';
+        pluginOptions: {
+            progressive: true,
+            svgoPlugins: [{removeViewBox: false}],
+            use: [pngquant()]
+        }
+    };
 
-    src = utilities.buildGulpSrc(src, baseDir, '**/*');
+    options = _.extend(config.images.pluginOptions, options);
 
-    options = _.extend({
-        progressive: true,
-        svgoPlugins: [{removeViewBox: false}],
-        use: [pngquant()]
-    }, options);
+    new elixir.Task('imagemin', function () {
+        var paths = new elixir.GulpPaths()
+            .src(src, src || config.get('assets.images.folder'))
+            .output(output || config.get('public.images.outputFolder'));
 
-    gulp.task('imagemin', function() {
-        return gulp.src(src)
-            .pipe(changed(output || 'public/img'))
+        return gulp.src(paths.src.path)
+            .pipe(changed(paths.output.path))
             .pipe(imagemin(options))
-            .pipe(gulp.dest(output || 'public/img'))
-            .on('error', notify.onError({
-                title: 'ImageMin Failed!',
-                message: 'Failed to optimise images.',
-                icon: __dirname + '/../laravel-elixir/icons/fail.png'
-            }));
-    });
-
-    this.registerWatcher('imagemin', baseDir + '/**/*.{png,gif,svg,jpg,jpeg}');
-
-    return this.queueTask('imagemin');
-
+            .on('error', function(e) {
+                new elixir.Notification().error(e, 'ImageMin Failed!');
+                this.emit('end');
+            })
+            .pipe(gulp.dest(paths.output.path))
+            .pipe(new elixir.Notification('ImageMin Complete!'))
+    }).watch(
+        [
+            config.get('assets.images.folder') + '/**/*.jpg',
+            config.get('assets.images.folder') + '/**/*.jpeg',
+            config.get('assets.images.folder') + '/**/*.svg',
+            config.get('assets.images.folder') + '/**/*.gif',
+            config.get('assets.images.folder') + '/**/*.png'
+        ]
+    );
 });
