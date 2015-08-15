@@ -22,16 +22,17 @@ elixir(function(mix) {
 });
 ```
 
-This will scan your `resources/assets/img` directory for all image files. Instead, if you only want to process a single image, you may do:
+This will scan your `resources/assets/images` directory for all image files. Instead, if you only want to process a
+different directory, you may do:
 
 ```javascript
-mix.imagemin("bootstrap.png");
+mix.imagemin("./resources/assets/img");
 ```
 
-Finally, if you'd like to output to a different directory than the default public/css, then you may override this as well.
+Finally, if you'd like to output to a different directory than the default public/images, then you may override this as well.
 
 ```javascript
-mix.imagemin("bootstrap.png", "public/img/foo/bar/");
+mix.imagemin("./resources/assets/img", "public/images/foo/bar/");
 ```
 
 #### Advanced example
@@ -39,5 +40,5 @@ mix.imagemin("bootstrap.png", "public/img/foo/bar/");
 In third argument you could pass imagemin options.
 
 ```javascript
-mix.imagemin("bootstrap.png", "public/img", { optimizationLevel: 3, progressive: true, interlaced: true });
+mix.imagemin("./resources/assets/img", "public/img", { optimizationLevel: 3, progressive: true, interlaced: true });
 ```
