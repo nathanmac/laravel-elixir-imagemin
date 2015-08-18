@@ -34,7 +34,7 @@ elixir.extend('imagemin', function(src, output, options) {
 
     new elixir.Task('imagemin', function () {
         var paths = new elixir.GulpPaths()
-            .src(src, src || config.get('assets.images.folder'))
+            .src(src || config.get('assets.images.folder'))
             .output(output || config.get('public.images.outputFolder'));
 
         return gulp.src(paths.src.path)
