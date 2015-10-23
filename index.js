@@ -17,25 +17,23 @@ var config   = elixir.config;
  | Minify PNG, JPEG, GIF and SVG images
  |
  */
-elixir.extend('imagemin', function(src, output, options) {
+elixir.extend('imagemin', function(options) {
 
-    config.images = {
+    config.images = _.extend({
         folder: 'images',
-        outputFolder: 'images',
+        outputFolder: 'images'
+    }, config.images || {});
 
-        pluginOptions: {
-            progressive: true,
-            svgoPlugins: [{removeViewBox: false}],
-            use: [pngquant()]
-        }
-    };
-
-    options = _.extend(config.images.pluginOptions, options);
+    options = _.extend({
+        progressive: true,
+        svgoPlugins: [{removeViewBox: false}],
+        use: [pngquant()]
+    }, options);
 
     new elixir.Task('imagemin', function () {
         var paths = new elixir.GulpPaths()
-            .src(src || config.get('assets.images.folder'))
-            .output(output || config.get('public.images.outputFolder'));
+            .src(config.get('assets.images.folder'))
+            .output(config.get('public.images.outputFolder'));
 
         return gulp.src(paths.src.path)
             .pipe(changed(paths.output.path))
