@@ -1,0 +1,8 @@
+deploy:
+  provider: npm
+  email: hola@nathanmac.com
+  api_key:
+    secure: uhX8Z6YVjGfPDwoiHRGm7176zwSHQ2HBzixHRVB5ciS1lDjQmdxNMYKHFFOIRn8bN191APBMmUPdfZSbHXQJ2yqh/eVdJKfKLt4RXQcJZ5GZ7wScsCC6uRHL++JxWJVl917v+7pBimIetw6DjnbRrK1+54Ala8QUxkopP4zmlEY=
+  on:
+    tags: true
+    repo: nathanmac/laravel-elixir-imagemin
